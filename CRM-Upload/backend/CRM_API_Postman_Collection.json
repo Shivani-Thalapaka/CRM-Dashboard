@@ -1,0 +1,451 @@
+{
+  "info": {
+    "name": "CRM Backend API",
+    "description": "Complete CRM Backend API with Authentication, Customers, Leads, Contacts, and Stages",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{jwt_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000/api"
+    },
+    {
+      "key": "jwt_token",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"testuser\",\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customers",
+      "item": [
+        {
+          "name": "Get All Customers",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/customers",
+              "host": ["{{base_url}}"],
+              "path": ["customers"]
+            }
+          }
+        },
+        {
+          "name": "Get Customer by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/customers/1",
+              "host": ["{{base_url}}"],
+              "path": ["customers", "1"]
+            }
+          }
+        },
+        {
+          "name": "Create Customer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"phone\": \"+1234567890\",\n  \"company\": \"ABC Corp\",\n  \"address\": \"123 Main St, City, State\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/customers",
+              "host": ["{{base_url}}"],
+              "path": ["customers"]
+            }
+          }
+        },
+        {
+          "name": "Update Customer",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe Updated\",\n  \"email\": \"john.updated@example.com\",\n  \"phone\": \"+1234567891\",\n  \"company\": \"ABC Corp Updated\",\n  \"address\": \"456 Updated St, City, State\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/customers/1",
+              "host": ["{{base_url}}"],
+              "path": ["customers", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Customer",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/customers/1",
+              "host": ["{{base_url}}"],
+              "path": ["customers", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Customer Contacts",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/customers/1/contacts",
+              "host": ["{{base_url}}"],
+              "path": ["customers", "1", "contacts"]
+            }
+          }
+        },
+        {
+          "name": "Get Customer Leads",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/customers/1/leads",
+              "host": ["{{base_url}}"],
+              "path": ["customers", "1", "leads"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Leads",
+      "item": [
+        {
+          "name": "Get All Leads",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/leads",
+              "host": ["{{base_url}}"],
+              "path": ["leads"]
+            }
+          }
+        },
+        {
+          "name": "Get Lead by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/leads/1",
+              "host": ["{{base_url}}"],
+              "path": ["leads", "1"]
+            }
+          }
+        },
+        {
+          "name": "Create Lead",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer_id\": 1,\n  \"lead_source\": \"Website\",\n  \"status\": \"new\",\n  \"value\": 5000,\n  \"description\": \"Interested in our premium services\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/leads",
+              "host": ["{{base_url}}"],
+              "path": ["leads"]
+            }
+          }
+        },
+        {
+          "name": "Update Lead",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer_id\": 1,\n  \"lead_source\": \"Referral\",\n  \"status\": \"qualified\",\n  \"value\": 7500,\n  \"description\": \"Updated lead information\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/leads/1",
+              "host": ["{{base_url}}"],
+              "path": ["leads", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Lead",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/leads/1",
+              "host": ["{{base_url}}"],
+              "path": ["leads", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Contacts",
+      "item": [
+        {
+          "name": "Get All Contacts",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/contacts",
+              "host": ["{{base_url}}"],
+              "path": ["contacts"]
+            }
+          }
+        },
+        {
+          "name": "Get Contact by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/contacts/1",
+              "host": ["{{base_url}}"],
+              "path": ["contacts", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Contacts by Customer",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/contacts/customer/1",
+              "host": ["{{base_url}}"],
+              "path": ["contacts", "customer", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Contacts by Type",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/contacts/type/email",
+              "host": ["{{base_url}}"],
+              "path": ["contacts", "type", "email"]
+            }
+          }
+        },
+        {
+          "name": "Create Contact",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer_id\": 1,\n  \"contact_type\": \"email\",\n  \"contact_value\": \"john.work@example.com\",\n  \"is_primary\": false\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/contacts",
+              "host": ["{{base_url}}"],
+              "path": ["contacts"]
+            }
+          }
+        },
+        {
+          "name": "Update Contact",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer_id\": 1,\n  \"contact_type\": \"phone\",\n  \"contact_value\": \"+1987654321\",\n  \"is_primary\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/contacts/1",
+              "host": ["{{base_url}}"],
+              "path": ["contacts", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Contact",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/contacts/1",
+              "host": ["{{base_url}}"],
+              "path": ["contacts", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Stages",
+      "item": [
+        {
+          "name": "Get All Stages",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/stages",
+              "host": ["{{base_url}}"],
+              "path": ["stages"]
+            }
+          }
+        },
+        {
+          "name": "Get Stage by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/stages/1",
+              "host": ["{{base_url}}"],
+              "path": ["stages", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Stages by Lead",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/stages/lead/1",
+              "host": ["{{base_url}}"],
+              "path": ["stages", "lead", "1"]
+            }
+          }
+        },
+        {
+          "name": "Create Stage",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lead_id\": 1,\n  \"stage_name\": \"Initial Contact\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/stages",
+              "host": ["{{base_url}}"],
+              "path": ["stages"]
+            }
+          }
+        },
+        {
+          "name": "Update Stage",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"stage_name\": \"Qualified Lead\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/stages/1",
+              "host": ["{{base_url}}"],
+              "path": ["stages", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Stage",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/stages/1",
+              "host": ["{{base_url}}"],
+              "path": ["stages", "1"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
